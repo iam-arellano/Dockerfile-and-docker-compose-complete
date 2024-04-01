@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+    website1:
+      image: nginx:stable-alpine-perl
+      container_name: c_nginx3
+      restart: always
+      ports:
+        - "8083:80"
+      networks:
+        -  networks-ipam
+
+    website2:
+      image: nginx:stable-alpine-perl
+      container_name: c_nginx4
+      restart: always
+      ports:
+        - "8084:80"
+      networks:
+        -  networks-ipam
+
+
+networks:
+  networks-ipam:
+    ipam:
+      driver: default
+      config:
+         - subnet: 192.168.100.0/24
+ 

@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    container_name: c_wordpress
+    restart: always
+    ports:
+      - 8085:80
+    depends_on:
+      - mysql
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: password123
+      WORDPRESS_DB_NAME: wordpress_db
+    networks:
+        network-wordpress:
+          ipv4_address: 192.168.1.10
+
+  
+  mysql:
+    image: mysql:8.3.0
+    container_name: c_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password123
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      -  ./mysql:/var/lib/mysql
+    networks:
+        network-wordpress:
+          ipv4_address: 192.168.1.11
+
+
+networks:
+  network-wordpress:
+    ipam:
+      driver: default
+      config:
+         - subnet: 192.168.1.0/24

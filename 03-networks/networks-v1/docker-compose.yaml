@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+    website1:
+      image: nginx:stable-alpine-perl
+      container_name: c_nginx
+      restart: always
+      ports:
+        - "8081:80"
+      networks:
+        - web1
+
+    website2:
+      image: nginx:stable-alpine-perl
+      container_name: c_nginx2
+      restart: always
+      ports:
+        - "8082:80"
+      networks:
+        - web2
+
+
+networks:
+  web1:
+  web2:
+
+ 

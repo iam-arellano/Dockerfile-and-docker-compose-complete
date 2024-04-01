@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: c_css_v2
+    restart: always
+    ports:
+      - "9003:80"
+   

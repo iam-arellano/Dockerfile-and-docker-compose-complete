@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  wordpress:
+     image: wordpress:latest
+     container_name: c_wordpress
+     ports:
+       - "8000:80"
+     depends_on:
+       - mysql
+     environment:
+       WORDPRESS_DB_HOST: mysql
+       WORDPRESS_DB_NAME: wordpress_db
+       WORDPRESS_DB_USER: admin
+       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/my_password
+     secrets:
+       - my_password
+
+
+
+  mysql:
+     image: mysql:latest
+     container_name: c_mysql
+     environment:
+       MYSQL_DATABASE: wordpress_db
+       MYSQL_USER: admin
+       MYSQL_PASSWORD_FILE: /run/secrets/my_password
+       MYSQL_RANDOM_ROOT_PASSWORD: '1'
+     secrets:
+       - my_password
+
+
+
+secrets:
+   my_password:
+     file: ./secrets/db_password.txt
+  #  db_root_password:
+  #    file: ./secrets/db_root_password.txt
