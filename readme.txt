@@ -1,1 +1,1 @@
-This is for eduction purpose
+This is for education purpose
