@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    container_name: c_web
+    restart: always
+    ports:
+      - "9001:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_DEBUG: "true"
+  
+  redis:
+    container_name: c_redis
+    restart: always
+    image: "redis:alpine"
