@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    container_name: c_nodejs
+    restart: always
+    ports:
+      - "9004:3000"
+   
