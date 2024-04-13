@@ -28,8 +28,6 @@ FROM php:8.2.18-apache
 
 COPY --from=builder /var/www/html /var/www/html
 
-WORKDIR /var/www/html
-
 EXPOSE 80
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
