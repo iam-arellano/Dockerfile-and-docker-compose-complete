@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libapache2-mod-php
 
 
+
 WORKDIR /var/www/html
 
 # copy the code to container
@@ -26,7 +27,12 @@ RUN chmod -R 755 .
 # Stage 2: Create a lightweight image
 FROM php:8.2.18-apache
 
+COPY apache2.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
+
 COPY --from=builder /var/www/html /var/www/html
+
+
 
 EXPOSE 80
 

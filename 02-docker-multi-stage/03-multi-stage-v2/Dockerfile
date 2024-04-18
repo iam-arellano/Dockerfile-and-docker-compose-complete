@@ -1,50 +1,38 @@
-# Use node:16-alpine image as a parent image
-FROM node:16-alpine
+FROM php:8.2.18-apache as builder
 
-# Create app directory
-WORKDIR /usr/src/app
+# # COPY apache2.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy package.json files to the working directory
-COPY package*.json ./
+# RUN a2enmod rewrite
 
-# Install app dependencies
-RUN npm install
+WORKDIR /var/www/html
 
-# Copy the source files
-COPY . .
+COPY index.php .
 
-# Build the React app for production
-RUN npm run build
+RUN chmod -R 755 .
 
-# Expose port 3000 for serving the app
-EXPOSE 3000
 
-# Command to run the app
-CMD ["npm", "start"]
 
-################### sample multi stage
+FROM ubuntu:latest
 
-FROM node:16-alpine AS build
+## update and install  region
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && apt install -y tcl
 
-# Create app directory
-WORKDIR /usr/src/app
+## install apache2
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    php \
+    libapache2-mod-php \
+    nano
 
-# Copy package.json files to the working directory
-COPY package*.json ./
+COPY apache2.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
 
-# Install app dependencies
-RUN npm install
 
-# Copy the source files
-COPY . .
+# WORKDIR /var/www/html
 
-# Build the React app for production
-RUN npm run build
+COPY --from=builder /var/www/html /var/www/html
 
-# Second stage - Serve the application
-FROM nginx:alpine
-
-# Copy build files to Nginx
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
