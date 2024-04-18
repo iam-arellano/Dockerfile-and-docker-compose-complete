@@ -20,7 +20,7 @@ RUN apt update && apt install -y tcl
 
 ## install apache2
 RUN apt-get update && apt-get install -y \
-    # apache2 \
+    apache2 \
     php \
     libapache2-mod-php \
     nano
@@ -34,5 +34,5 @@ RUN a2enmod rewrite
 COPY --from=builder /var/www/html /var/www/html
 
 EXPOSE 80
-# ENTRYPOINT [ "/var/www/html/" ]
+
 CMD ["apache2ctl", "-D", "FOREGROUND"]
