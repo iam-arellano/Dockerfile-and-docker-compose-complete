@@ -1,4 +1,16 @@
-Here are the most common instructions used in a Dockerfile:
+What is Dockerfile?
+- Dockerfile is like a blueprint is a simple text file with instruction to build a image
+
+Why we need Docker?
+-  Docker is to improve the portability and scalability of our applications. By using Docker containers, 
+   developers can ensure that their applications work consistently across different machines, regardless of the software and hardware configurations.
+  Exampl Senario
+
+  
+
+
+
+Here are the most common instructions used in a Dockerfile: 
 
 1. FROM - specifies the base image for the container
 2. RUN - executes commands in the container
