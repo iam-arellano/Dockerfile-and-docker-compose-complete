@@ -23,6 +23,8 @@ Here are the most common instructions used in a Dockerfile:
 9. MAINTAINER - specifies the maintainer of the Dockerfile
 10. LABEL - adds metadata to the image
 
+11. ADD - use to add files to the container being built.
+
 Here is an example of a Dockerfile using these instructions:
 
 ```
