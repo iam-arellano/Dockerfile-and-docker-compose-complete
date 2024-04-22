@@ -4,8 +4,11 @@ What is Dockerfile?
 Why we need Docker?
 -  Docker is to improve the portability and scalability of our applications. By using Docker containers, 
    developers can ensure that their applications work consistently across different machines, regardless of the software and hardware configurations.
-  Exampl Senario
-
+   
+  Example Senario
+   - Imagine a team of developers working on a web application that runs on a specific version of a programming language, database, and other dependencies. 
+     Without Docker, each developer would need to set up their own development environment, which can be time-consuming and error-prone. 
+     Additionally, when the application needs to be deployed to a production server, there is always a risk of differences between the development and production environments leading to deployment issues.
   
 
 
